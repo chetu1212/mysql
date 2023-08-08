@@ -147,4 +147,13 @@
 
 -- Q21. Write a query to retrieve Departments who have less than 2 employees working in it.
 
-SELECT department,count(empid) from employeeinfo GROUP BY department HAVING count(empid)<2;
+-- SELECT department,count(empid) from employeeinfo GROUP BY department HAVING count(empid)<2;
+
+-- Q22. Write a query to retrieve EmpPostion along with total salaries paid for each of them.
+
+-- select emppos,sum(salary) from empposition GROUP BY emppos;
+
+-- Q23. Write a query to fetch 50% records from the EmployeeInfo table.
+
+-- SELECT * from employeeinfo WHERE empid<=(select count(empid)
+--  from employeeinfo)/2;
