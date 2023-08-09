@@ -78,3 +78,94 @@
 -- SELECT REPLACE(fullname,' ','-') from employeedetails;
 
 -- SELECT fullname from employeedetails;
+
+-- 17. Write an SQL query to fetch the position of a given character(s) in a field.
+
+-- select fullname,instr(fullname,'a') from employeedetails;
+
+-- 18. Write an SQL query to display both the EmpId and ManagerId together.
+
+-- select empid,managerid from employeedetails;
+-- select concat(empid,',',managerid) from employeedetails;
+
+-- 19. Write a query to fetch only the first name(string before space) from the FullName column of the EmployeeDetails table.
+
+-- SELECT fullname,mid(fullname,1,locate(' ',fullname)) as firstname from employeedetails; 
+
+-- 20. Write an SQL query to uppercase the name of the employee and lowercase the city values.
+
+-- select upper(fullname),lower(city) from employeedetails;
+
+-- 21. Write an SQL query to find the count of the total occurrences of a particular character – ‘n’ in the FullName field.
+
+-- select fullname,length(fullname)-length(REPLACE(fullname,'n','')) as length from employeedetails;
+
+-- 22. Write an SQL query to get the employee names by removing leading and trailing spaces.
+
+-- select fullname,ltrim(rtrim(fullname)) from employeedetails;
+
+-- 23. Fetch all the employees who are not working on any project.
+
+-- select count(empid) from employeedetails WHERE empid 
+-- NOT IN (select empid from employeesalary);
+
+-- 24. Write an SQL query to fetch employee names having 
+-- a salary greater than or equal to 5000
+--  and less than or equal to 10000.
+
+-- SELECT fullname from employeedetails WHERE empid IN
+--  (select empid from employeesalary where salary BETWEEN 5000 and 10000);
+
+-- 25. Write an SQL query to find the current date-time.
+
+-- select now();
+
+-- 26. Write an SQL query to fetch all the Employee details from the EmployeeDetails table who joined in the Year 2020.
+
+-- select * from employeedetails WHERE doj BETWEEN '2020-01-01' AND '2020-12-30';
+
+-- select * from employeedetails WHERE YEAR(doj)='2020';
+
+-- 27. Write an SQL query to fetch all employee records from
+--  the EmployeeDetails table who have a salary record in the EmployeeSalary table.
+
+-- select * from employeedetails s where EXISTS (SELECT * from employeesalary e
+--  WHERE s.empid=e.empid);
+
+-- 28. Write an SQL query to fetch the project-wise count of employees sorted by project’s count in descending order.
+
+-- select project,count(*) AS NUM from employeesalary GROUP BY project ORDER BY NUM DESC;
+
+-- 29. Write a query to fetch employee names and salary records. Display the employee details even if the salary record is not present for the employee.
+
+-- select employeedetails.fullname,employeesalary.salary from employeedetails left join employeesalary on employeedetails.empid=employeesalary.empid;
+
+-- select employeedetails.empid,fullname,salary from employeedetails join employeesalary on employeedetails.empid=employeesalary.empid;
+
+-- 31. Write an SQL query to fetch all the Employees who are also managers from the EmployeeDetails table.
+
+-- select distinct e.fullname from employeedetails e INNER JOIN employeedetails m on e.empid=m.managerid;
+
+-- 32. Write an SQL query to fetch duplicate records from EmployeeDetails (without considering the primary key – EmpId).
+
+-- INSERT INTO employeedetails VALUES(102,'chetan',305,'2019-01-01','ujjain');
+-- SELECT fullname,empid,managerid,count(*) from employeedetails GROUP BY fullname,empid,managerid HAVING count(*)>1;
+
+-- 33. Write an SQL query to remove duplicates from a table without using a temporary table.
+
+-- delete e from employeedetails e inner JOIN employeedetails p on e.empid > p.empid
+-- and e.fullname=p.fullname and e.managerid=p.managerid;
+
+-- select * from employeedetails;
+
+-- 34. Write an SQL query to fetch only odd rows from the table.
+
+-- SELECT * from employeedetails WHERE mod(empid,2)=1;
+
+-- 40. Write SQL query to find the 3rd highest salary from a table without using the TOP/limit keyword.
+
+-- select salary from employeesalary emp1
+-- where 2=(select count(distinct(emp2.salary)) from employeesalary emp2 where
+-- emp2.salary > emp1.salary);
+
+
