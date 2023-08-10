@@ -107,3 +107,74 @@
 -- SELECT * from patient ORDER BY p_id DESC LIMIT 2;
 
 -- select * from patient LIMIT 2 offset 3;
+
+-- Q17. Write a SQL query  to find all the patients who joined in the year 2022.
+
+-- select * FROM patient where YEAR(reg_date)=2022;
+
+-- Q18. Write a SQL query to fetch 50% records from the PatientsCheckup table.
+
+-- select * from checkup WHERE p_id < (SELECT count(p_id)/2 from checkup);
+
+-- Q19. Write a query to find those patients who have paid consultation fees between 400 to 700.
+
+-- SELECT * from patient WHERE p_id IN (SELECT p_id from checkup WHERE fee BETWEEN 400 and 700);
+
+-- Q20. Write a query to update the patient names by removing the leading and trailing spaces.
+
+-- UPDATE patient set p_name=LTRIM(RTRIM(p_name));
+
+-- Q21. Write a query to add email validation to your database.
+
+-- SELECT email FROM patient WHERE NOT REGEXP_LIKE(email, '[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}', 'i');
+
+-- Q22. Write a query to find all patient names whose name:
+-- Begin with A
+
+-- select p_name from patient WHERE p_name like('A%');
+
+-- Ends with S and contains 3 alphabets
+-- SELECT p_name from patient where p_name like '___S';
+
+-- Staying in the state Telangana
+
+-- SELECT p_name from patient where state like 'Telangana';
+
+-- Q23. Write a SQL query to fetch details of all patients excluding patients with name  “Sheela” and “Anay”.
+
+-- select * from patient WHERE p_name not IN ('Sheela','Anay');
+
+-- Q24. Write a query to fetch the total count of occurrences of a particular character – 'a' in the PatientName.
+
+-- select p_name,length(p_name)-length(replace(p_name,'a','')) as countofx from patient;
+
+-- Q25. Write a query to retrieve the first three characters of  PatientName from the Patients table.
+
+-- select substring(p_name,1,3) from patient;
+
+-- Q26. Write a query to fetch only the Address (string before space).
+
+-- select mid(address,1,locate(' ',address)) from patient;
+
+-- Q27. Write a query to combine Address and state into a new column - NewAddress.
+
+-- select concat(address,' ',state) as NewAddress from patient;
+
+-- Q28. Write a query to fetch PatientIDs  which are present in: 
+-- Both tables
+
+-- SELECT patient.p_id,patient.p_name from patient INNER JOIN checkup on patient.p_id=checkup.p_id;
+-- select P_id,p_name from patient where p_id in (select p_id from checkup);
+
+-- One of the table. Let us say, patients present in Patients and not in the PatientsCheckup table.
+
+-- SELECT patient.p_name,patient.p_id from patient WHERE patient.p_id not IN (select p_id from checkup);
+
+-- Q29. Write a query to find the number of patients whose RegDate is between 01/04/2021 to 31/12/2022 and are grouped according to state.
+
+-- select state,count(p_id) from patient WHERE reg_date BETWEEN '2022-04-01' and '2022-12-31'
+-- GROUP BY state ;
+
+-- Q30. Write a query to fetch all records from the Patients table; ordered by PatientName in ascending order, State in descending order.
+
+--  select * from patient ORDER BY p_name ASC,state DESC;
