@@ -56,3 +56,54 @@
 
 -- CREATE table temp2(select * from patient);
 
+-- Q6. Write a query to fetch even and odd rows from a table.
+
+-- select * from patient where mod(p_id,2)=0;
+
+-- Q7. Write an SQL query to fetch duplicate records from Patients, without considering the primary key.
+
+-- select p_name,state,doctor_id,count(*) from patient
+-- GROUP BY p_name,state,doctor_id HAVING count(*)>1;
+
+-- Q8. Write a query to fetch the number of patients whose weight is greater than 68.
+
+-- select count(*) as overweight from checkup WHERE weight>68;
+
+-- Q9. Write a query to retrieve the list of patients from the same state.
+
+-- select p.p_name from patient p,patient p1 WHERE p.p_name != p1.p_name and p.state=p1.state;
+
+-- select * from patient;
+
+-- Q10. Write a query to retrieve two minimum and maximum consultation fees from the PatientsCheckup Table.
+
+-- SELECT fee as fees from checkup ORDER BY fee ASC LIMIT 2;
+
+-- SELECT fee as fees from checkup ORDER BY fee DESC LIMIT 2;
+
+-- Q11. Write a query to fetch patient details along with the weight fees, even if the details are missing.
+
+-- SELECT p.p_name,p1.fee from patient p LEFT JOIN checkup p1 on p.p_id=p1.p_id;
+
+-- Q12. Write a SQL query to fetch doctor wise count of patients sorted by the doctors.
+
+-- SELECT doctor_id,count(*) from patient GROUP BY doctor_id ORDER BY doctor_id DESC;
+
+-- Q13. Write a SQL query to fetch the first and last record of the Patients table.
+
+-- SELECT * from patient WHERE p_id=(select min(p_id) from patient);
+
+-- select * from patient where p_id=(SELECT max(p_id) from patient);
+
+-- Q14. Write a SQL query to fetch consultation fees - wise count and sort them in descending order.
+
+-- SELECT fee,count(fee) from checkup GROUP BY fee ORDER BY fee DESC;
+
+-- Q15. Write a SQL query to retrieve patient details from the Patients table who have a weight in the PatientsCheckup table.
+
+-- SELECT p.* from patient p,checkup c WHERE p.p_id=c.p_id;
+
+-- Q16. Write a SQL query to retrieve the last 2 records from the Patients table.
+-- SELECT * from patient ORDER BY p_id DESC LIMIT 2;
+
+-- select * from patient LIMIT 2 offset 3;
